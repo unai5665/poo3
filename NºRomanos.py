@@ -32,4 +32,12 @@ def romano_a_decimal(romano):
         prev_val = val
     return decimal
 
+numero_decimal=700
+numero_romano = decimal_a_romano(numero_decimal)
+print(f"{numero_decimal} en romano es: {numero_romano}")
+
+numero_romano="CVVV"
+numero_decimal = romano_a_decimal(numero_romano)
+print(f"{numero_romano}en decimal es: {numero_decimal}")
+
 
