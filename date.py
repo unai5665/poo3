@@ -23,16 +23,10 @@ class Date:
     @staticmethod
     def is_leap_year(year: int) -> bool:
         '''Un año es bisiesto en el calendario Gregoriano, si es divisible entre 4 y no divisible entre 100, y también si es divisible entre 400.'''
-        resultado = False
-
-        if year % 4 == 0 and year % 100 != 0:
-            resultado = True
-        elif year % 400 == 0:
-            resultado = True
-
-        #if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
-        print(__name__)
-        return resultado
+        if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+            return True
+        else:
+            return False
     @staticmethod
     def days_in_month(month: int, year: int) -> int:
         days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -127,32 +121,21 @@ class Date:
             return (self.year, self.month, self.day) == (other.year, other.month, other.day)
         return False
 
-if __name__ == "__main__":
-    # Aquí va un código de prueba
-    date1 = Date(2023, 3, 16)
-    date2 = Date(2023, 3, 17)
-
-    # Imprimir la representación de fecha corta
-    print("Fecha 1:", date1.short_date)
-    print("Fecha 2:", date2.short_date)
-
-    # Sumar y restar días
-    new_date = date1 + 10
-    print("Nueva fecha después de sumar 10 días:", new_date.short_date)
-
-    days_difference = date2 - date1
-    print("Diferencia de días entre las dos fechas:", days_difference)
-
-    # Comparar fechas
-    if date1 < date2:
-        print("Fecha 1 es anterior a Fecha 2")
-    elif date1 > date2:
-        print("Fecha 1 es posterior a Fecha 2")
-    else:
-        print("Fecha 1 y Fecha 2 son iguales")
-
-    # Comprobar igualdad de fechas
-    if date1 == date2:
-        print("Las fechas son iguales")
-    else:
-        print("Las fechas son diferentes")
+fecha = Date(21, 3, 2024)
+print(Date.is_leap_year(2024))
+print(Date.days_in_month(3, 2024))
+print(fecha.get_delta_days())
+print(fecha.weekday)
+print(fecha.is_weekend)
+print(fecha.short_date)
+print(fecha)
+nueva_fecha = fecha + 10
+print(nueva_fecha.short_date)
+fecha_anterior = fecha - 3
+print(fecha_anterior.short_date)
+otra_fecha = Date(1, 1, 2024)
+diferencia = fecha - otra_fecha
+print(diferencia)
+print(otra_fecha < fecha)
+print(fecha > otra_fecha)
+print(otra_fecha == fecha)
