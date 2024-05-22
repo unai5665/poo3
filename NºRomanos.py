@@ -1,43 +1,35 @@
-def decimal_a_romano(numero):
-    valores = [
-        1000, 900, 500, 400,
-        100, 90, 50, 40,
-        10, 9, 5, 4,
-        1
-    ]
-    simbolos = [
-        "M", "CM", "D", "CD",
-        "C", "XC", "L", "XL",
-        "X", "IX", "V", "IV",
-        "I"
-    ]
-    resultado = ""
-    i = 0
-    while numero > 0:
-        for _ in range(numero // valores[i]):
-            resultado += simbolos[i]
-            numero -= valores[i]
-        i += 1
-    return resultado
+class NumerosRomanos:
+    @staticmethod
+    def entero_a_romano(numero):
+        valores = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        simbolos = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']
+        resultado = ''
+        indice = 0
+        while numero > 0:
+            if numero >= valores[indice]:
+                resultado += simbolos[indice]
+                numero -= valores[indice]
+            else:
+                indice += 1
+        return resultado
 
-def romano_a_decimal(romano):
-    romano_valores = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-    decimal = 0
-    prev_val = 0
-    for letra in romano:
-        val = romano_valores[letra]
-        decimal += val
-        if prev_val < val:
-            decimal -= 2 * prev_val
-        prev_val = val
-    return decimal
+    @staticmethod
+    def romano_a_entero(romano):
+        valores = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        total = 0
+        anterior = 0
+        longitud = len(romano)
+        
+        for i in range(longitud):
+            valor = valores[romano[i]]
+            if i < longitud - 1 and valor < valores[romano[i + 1]]:
+                total -= valor
+            else:
+                total += valor
+        
+        return total
 
-numero_decimal=700
-numero_romano = decimal_a_romano(numero_decimal)
-print(f"{numero_decimal} en romano es: {numero_romano}")
-
-numero_romano="CVVV"
-numero_decimal = romano_a_decimal(numero_romano)
-print(f"{numero_romano}en decimal es: {numero_decimal}")
-
-
+# Ejemplo de uso
+if __name__ == '__main__':
+    print(NumerosRomanos.entero_a_romano(500))   # Salida: D
+    print(NumerosRomanos.romano_a_entero('IX'))  # Salida: 9
